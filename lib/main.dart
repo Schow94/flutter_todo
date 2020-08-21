@@ -59,6 +59,17 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
+  void _toggleAddTodo(BuildContext ctx) {
+    showModalBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            child: AddTodoInput(_addNewTodo),
+            behavior: HitTestBehavior.opaque,
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -69,7 +80,10 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           title: Text('Todo App'),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.add), onPressed: () {})
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () => _toggleAddTodo(context),
+            ),
           ],
         ),
         body: Container(
@@ -77,14 +91,22 @@ class _MyHomePageState extends State<MyHomePage> {
           width: double.infinity,
           child: Column(
             children: <Widget>[
-              AddTodoInput(_addNewTodo),
+              Container(
+                margin: EdgeInsets.all(15),
+                child: Text(
+                  'Todo List',
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+              ),
               TodoList(_todoItems, _removeTodo),
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () => _toggleAddTodo(context),
         ),
       ),
     );

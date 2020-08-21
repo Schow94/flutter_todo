@@ -6,10 +6,12 @@ class AddTodoInput extends StatelessWidget {
 
   AddTodoInput(this.addNewTodo);
 
-  void submitData() {
+  void submitData(BuildContext context) {
     final newTodo = todoController.text;
 
     addNewTodo(newTodo);
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -22,7 +24,7 @@ class AddTodoInput extends StatelessWidget {
             decoration: InputDecoration(
               labelText: 'Todo Item',
             ),
-            onSubmitted: (_) => submitData(),
+            onSubmitted: (_) => submitData(context),
           ),
           RaisedButton(
             color: Colors.blue,
@@ -31,7 +33,7 @@ class AddTodoInput extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                 )),
-            onPressed: submitData,
+            onPressed: () => submitData(context),
           ),
         ],
       ),
