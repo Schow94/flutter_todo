@@ -29,11 +29,13 @@ class _MyHomePageState extends State<MyHomePage> {
       id: DateTime.now().toString(),
       title: 'Meal Prep',
       date: DateTime.now(),
+      finished: true,
     ),
     TodoItem(
       id: DateTime.now().toString(),
       title: 'Workout',
       date: DateTime.now(),
+      finished: false,
     ),
   ];
 
@@ -42,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       id: DateTime.now().toString(),
       title: todoTitle,
       date: DateTime.now(),
+      finished: false,
     );
 
     setState(() {
@@ -70,13 +73,18 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+// Not sure how to find object of interest, update it, and then update list of objects
+  void _toggleFinihed(String id) {
+    setState(() {
+      Object itemToEdit = _todoItems.where((task) => task.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.green,
       title: 'First Flutter App',
       home: Scaffold(
-        // backgroundColor: Colors.green,
         appBar: AppBar(
           title: Text('Todo App'),
           actions: <Widget>[
@@ -87,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         body: Container(
-          // color: Colors.blue,
+          color: Colors.grey[200],
           width: double.infinity,
           child: Column(
             children: <Widget>[

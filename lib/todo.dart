@@ -13,25 +13,33 @@ class Todo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 100,
+      height: 150,
       child: Card(
-        color: Colors.grey[300],
+        color: Colors.white,
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                task.title,
-                style: TextStyle(
-                  fontSize: 18,
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    task.title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      decoration: task.finished ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                  Text(
+                    DateFormat.yMMMd().format(task.date),
+                    style: TextStyle(fontSize: 13, color: Colors.grey),
+                  ),
+                ],
               ),
-              Text(DateFormat.yMMMd().format(task.date)),
               Container(
-                // color: Colors.green,
-                width: 180,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
